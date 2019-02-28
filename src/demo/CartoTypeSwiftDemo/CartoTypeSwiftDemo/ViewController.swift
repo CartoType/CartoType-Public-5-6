@@ -2,21 +2,20 @@
 //  ViewController.swift
 //  CartoTypeSwiftDemo
 //
-//  Created by Graham Asher on 20/11/2016.
-//  Copyright © 2016-2018 CartoType Ltd. All rights reserved.
+//  Copyright © 2016-2019 CartoType Ltd. All rights reserved.
 //
 
 import UIKit
 import GLKit
 import CoreLocation
 
-class ViewController: GLKViewController, UIGestureRecognizerDelegate, UISearchBarDelegate, CLLocationManagerDelegate
-{
+class ViewController: CartoTypeViewController, UISearchBarDelegate, CLLocationManagerDelegate
+    {
     var m_framework: CartoTypeFramework!
-    var m_ui_scale: CGFloat = UIScreen.main.scale
-    var m_route_start = CartoTypePoint(x:0, y:0)
-    var m_route_end = CartoTypePoint(x:0, y:0)
-    var m_last_point_pressed = CartoTypePoint(x:0, y:0)
+    let m_ui_scale: Double = Double(UIScreen.main.scale)
+    var m_route_start_in_degrees = CartoTypePoint(x:0, y:0)
+    var m_route_end_in_degrees = CartoTypePoint(x:0, y:0)
+    var m_last_point_pressed_in_degrees = CartoTypePoint(x:0, y:0)
     var m_search_bar: UISearchBar!
     var m_route_instructions: UILabel!
     var m_navigate_button: UIButton!
@@ -26,48 +25,21 @@ class ViewController: GLKViewController, UIGestureRecognizerDelegate, UISearchBa
     var m_location: CLLocation!
     
     required init?(coder aDecoder: NSCoder)
-    {
+        {
         super.init(coder: aDecoder)
-    }
+        }
     
-    init(framework aFrameWork: CartoTypeFramework!)
-    {
-        super.init(nibName: nil,bundle: nil)
-        m_framework = aFrameWork
-    }
-    
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+        {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        }
 
+    init(aFrameWork: CartoTypeFramework!, aBounds: CGRect)
+        {
+        super.init(_:aFrameWork, bounds:aBounds)
+
+        m_framework = aFrameWork
         self.becomeFirstResponder()
-        m_ui_scale = UIScreen.main.scale
-        view.isMultipleTouchEnabled = true
-        
-        // Create a pan gesture recognizer.
-        let my_pan_recognizer = UIPanGestureRecognizer(target: self,action: #selector(ViewController.handlePanGesture(_:)))
-        my_pan_recognizer.delegate = self
-        view.addGestureRecognizer(my_pan_recognizer)
-        
-        // Create a pinch gesture recognizer.
-        let my_pinch_recognizer = UIPinchGestureRecognizer(target: self,action: #selector(ViewController.handlePinchGesture(_:)))
-        my_pinch_recognizer.delegate = self
-        view.addGestureRecognizer(my_pinch_recognizer)
-        
-        // Create a rotation gesture recognizer.
-        let my_rotation_recognizer = UIRotationGestureRecognizer(target: self,action: #selector(ViewController.handleRotationGesture(_:)))
-        my_rotation_recognizer.delegate = self
-        view.addGestureRecognizer(my_rotation_recognizer)
-        
-        // Create a tap gesture recognizer.
-        let my_tap_recognizer = UITapGestureRecognizer(target: self,action: #selector(ViewController.handleTapGesture(_:)))
-        my_tap_recognizer.delegate = self
-        view.addGestureRecognizer(my_tap_recognizer)
-        
-        // Create a long-press gesture recognizer.
-        let my_long_press_recognizer = UILongPressGestureRecognizer(target: self,action: #selector(ViewController.handleLongPressGesture(_:)))
-        my_long_press_recognizer.delegate = self
-        view.addGestureRecognizer(my_long_press_recognizer)
         
         // Create a search bar.
         m_search_bar = UISearchBar.init()
@@ -117,138 +89,78 @@ class ViewController: GLKViewController, UIGestureRecognizerDelegate, UISearchBa
         
         // Set the vehicle location to a quarter of the way up the display.
         m_framework.setVehiclePosOffsetX(0, andY: 0.25)
-    }
+        }
     
     override func didReceiveMemoryWarning()
-    {
+        {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+        }
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer)->Bool
-    {
-        return true
-    }
+    override func onTap(_ aPointInDegrees: CartoTypePoint)
+        {
+        }
     
-    func handlePanGesture(_ aRecognizer:UIPanGestureRecognizer)
-    {
-        if (aRecognizer.state == UIGestureRecognizerState.changed)
+    override func onLongPress(_ aPointInDegrees: CartoTypePoint)
         {
-            let t = aRecognizer.translation(in: nil)
-            m_framework.panX(Int32(-t.x * m_ui_scale), andY: Int32(-t.y * m_ui_scale))
-            aRecognizer.setTranslation(CGPoint.zero, in: nil)
-        }
-        else if (aRecognizer.state == UIGestureRecognizerState.recognized)
-        {
-        }
-        else if (aRecognizer.state == UIGestureRecognizerState.cancelled)
-        {
-        }
-    }
-    
-    func handlePinchGesture(_ aRecognizer:UIPinchGestureRecognizer)
-    {
-        if (aRecognizer.state == UIGestureRecognizerState.changed)
-        {
-            let p = aRecognizer.location(in: nil)
-            m_framework.zoom(at: Double(aRecognizer.scale), x: Double(p.x * m_ui_scale), y: Double(p.y * m_ui_scale), coordType: DisplayCoordType)
-            aRecognizer.scale = 1
-        }
-        else if (aRecognizer.state == UIGestureRecognizerState.recognized)
-        {
-        }
-        else if (aRecognizer.state == UIGestureRecognizerState.cancelled)
-        {
-        }
-    }
-    
-    func handleRotationGesture(_ aRecognizer:UIRotationGestureRecognizer)
-    {
-        if (aRecognizer.state == UIGestureRecognizerState.changed)
-        {
-            m_framework.rotate(Double(aRecognizer.rotation) / Double.pi * 180)
-            aRecognizer.rotation = 0
-        }
-        else if (aRecognizer.state == UIGestureRecognizerState.recognized)
-        {
-        }
-        else if (aRecognizer.state == UIGestureRecognizerState.cancelled)
-        {
-        }
-    }
-    
-    func handleTapGesture(_ aRecognizer:UITapGestureRecognizer)
-    {
-        if (aRecognizer.state == UIGestureRecognizerState.recognized)
-        {
-        }
-    }
-    
-    func handleLongPressGesture(_ aRecognizer:UILongPressGestureRecognizer)
-        {
-        if (aRecognizer.state == UIGestureRecognizerState.recognized)
+        m_last_point_pressed_in_degrees = aPointInDegrees;
+        var p = m_last_point_pressed_in_degrees;
+        m_framework.convert(&p, from: DegreeCoordType, to: DisplayCoordType)
+        
+        // Find nearby objects.
+        let object_array = NSMutableArray.init()
+        let pixel_mm = m_framework.getResolutionDpi() / 25.4
+        m_framework.find(inDisplay: object_array, maxItems: 10, point: p, radius: ceil(2 * pixel_mm))
+        
+        // See if we have a pushpin.
+        m_pushpin_id = 0
+        for (cur_object) in object_array
             {
-            let p = aRecognizer.location(in: nil)
-            m_last_point_pressed.x = Double(p.x * m_ui_scale)
-            m_last_point_pressed.y = Double(p.y * m_ui_scale)
-            let pp : CartoTypePoint = m_last_point_pressed
-            m_framework.convert(&m_last_point_pressed, from: DisplayCoordType, to: MapCoordType)
-            
-            // Find nearby objects.
-            let object_array = NSMutableArray.init()
-            let pixel_mm = m_framework.getResolutionDpi() / 25.4
-            m_framework.find(inDisplay: object_array, maxItems: 10, point: pp, radius: ceil(2 * pixel_mm))
-            
-            // See if we have a pushpin.
-            m_pushpin_id = 0
-            for (cur_object) in object_array
+            if ((cur_object as! CartoTypeMapObject).getLayerName().isEqual("pushpin"))
                 {
-                if ((cur_object as! CartoTypeMapObject).getLayerName().isEqual("pushpin"))
-                    {
-                    m_pushpin_id = (cur_object as! CartoTypeMapObject).getId()
-                    break
-                    }
+                m_pushpin_id = (cur_object as! CartoTypeMapObject).getId()
+                break
                 }
-                
-            // Create the menu.
-            let menu = UIMenuController.shared
-            var pushpin_menu_item : UIMenuItem?
-            if (m_pushpin_id != 0)
-                {
-                pushpin_menu_item = UIMenuItem.init(title: "Delete pin", action: #selector(deletePushPin))
-                }
-            else
-                {
-                pushpin_menu_item = UIMenuItem.init(title: "Insert pin", action: #selector(insertPushPin))
-                }
-            menu.menuItems = [
-                             pushpin_menu_item!,
-                             UIMenuItem.init(title: "Start here", action: #selector(ViewController.setRouteStart)),
-                             UIMenuItem.init(title: "End here", action: #selector(ViewController.setRouteEnd)),
-                             ]
-            menu.setTargetRect(CGRect(x:p.x,y:p.y,width:1,height:1), in: view)
-            menu.setMenuVisible(true, animated: true)
             }
+            
+        // Create the menu.
+        let menu = UIMenuController.shared
+        var pushpin_menu_item : UIMenuItem?
+        if (m_pushpin_id != 0)
+            {
+            pushpin_menu_item = UIMenuItem.init(title: "Delete pin", action: #selector(deletePushPin))
+            }
+        else
+            {
+            pushpin_menu_item = UIMenuItem.init(title: "Insert pin", action: #selector(insertPushPin))
+            }
+        menu.menuItems = [
+                         pushpin_menu_item!,
+                         UIMenuItem.init(title: "Start here", action: #selector(ViewController.setRouteStart)),
+                         UIMenuItem.init(title: "End here", action: #selector(ViewController.setRouteEnd)),
+                         ]
+        menu.setTargetRect(CGRect(x:p.x / m_ui_scale,y:p.y / m_ui_scale,width:1,height:1), in: view)
+        menu.setMenuVisible(true, animated: true)
         }
     
     override var canBecomeFirstResponder: Bool { return true }
     
     func setRouteStart()
         {
-        m_route_start = m_last_point_pressed
-        if (m_route_end.x != 0 && m_route_end.y != 0)
+        m_route_start_in_degrees = m_last_point_pressed_in_degrees
+        if (m_route_end_in_degrees.x != 0 && m_route_end_in_degrees.y != 0)
             {
             m_navigate_button.isHidden = false
-            m_framework.startNavigation(from: m_route_start, start: MapCoordType, to: m_route_end, end: MapCoordType)
+            m_framework.startNavigation(from: m_route_start_in_degrees, start: DegreeCoordType, to: m_route_end_in_degrees, end: DegreeCoordType)
             }
         }
     
     func setRouteEnd()
         {
-        m_route_end = m_last_point_pressed
-        if (m_route_end.x != 0 && m_route_end.y != 0)
+        m_route_end_in_degrees = m_last_point_pressed_in_degrees
+        if (m_route_end_in_degrees.x != 0 && m_route_end_in_degrees.y != 0)
             {
-            m_framework.startNavigation(from: m_route_start, start: MapCoordType, to: m_route_end, end: MapCoordType)
+            m_framework.startNavigation(from: m_route_start_in_degrees, start: DegreeCoordType, to: m_route_end_in_degrees, end: DegreeCoordType)
             }
         m_navigate_button.isHidden = false
         }
@@ -256,9 +168,9 @@ class ViewController: GLKViewController, UIGestureRecognizerDelegate, UISearchBa
     func insertPushPin()
         {
         let a : CartoTypeAddress = CartoTypeAddress.init()
-        m_framework.getAddress(a, point: m_last_point_pressed, coordType: MapCoordType)
-        let p : CartoTypeMapObjectParam = CartoTypeMapObjectParam.init(type: PointMapObjectType, andLayer: "pushpin", andCoordType: MapCoordType)
-        p.appendX(m_last_point_pressed.x, andY: m_last_point_pressed.y)
+        m_framework.getAddress(a, point: m_last_point_pressed_in_degrees, coordType: DegreeCoordType)
+        let p : CartoTypeMapObjectParam = CartoTypeMapObjectParam.init(type: PointMapObjectType, andLayer: "pushpin", andCoordType: DegreeCoordType)
+        p.appendX(m_last_point_pressed_in_degrees.x, andY: m_last_point_pressed_in_degrees.y)
         p.mapHandle = 0
         p.stringAttrib = a.toString(false)
         m_framework.insertMapObject(p)
@@ -283,10 +195,9 @@ class ViewController: GLKViewController, UIGestureRecognizerDelegate, UISearchBa
                 {
                 if (m_location != nil)
                     {
-                    m_route_start.x = m_location.coordinate.longitude
-                    m_route_start.y = m_location.coordinate.latitude
-                    m_framework.convert(&m_route_start, from: DegreeCoordType, to: MapCoordType)
-                    m_framework.startNavigation(from: m_route_start, start: MapCoordType, to: m_route_end, end: MapCoordType)
+                    m_route_start_in_degrees.x = m_location.coordinate.longitude
+                    m_route_start_in_degrees.y = m_location.coordinate.latitude
+                    m_framework.startNavigation(from: m_route_start_in_degrees, start: DegreeCoordType, to: m_route_end_in_degrees, end: DegreeCoordType)
                     }
                 }
             
@@ -305,8 +216,8 @@ class ViewController: GLKViewController, UIGestureRecognizerDelegate, UISearchBa
             m_search_bar.isHidden = false
             m_route_instructions.isHidden = true
             m_navigating = false
-            m_route_start.x = 0; m_route_start.y = 0
-            m_route_end.x = 0; m_route_end.y = 0
+            m_route_start_in_degrees.x = 0; m_route_start_in_degrees.y = 0
+            m_route_end_in_degrees.x = 0; m_route_end_in_degrees.y = 0
             m_framework.deleteRoutes()
             m_navigate_button.isHidden = true
             }
@@ -391,4 +302,4 @@ class ViewController: GLKViewController, UIGestureRecognizerDelegate, UISearchBa
             }
         }
     
-}
+    }

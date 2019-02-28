@@ -7,30 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF1ABBA41FD9AA4600B8CDD2 /* corsica.ctm1 in Resources */ = {isa = PBXBuildFile; fileRef = BF1ABBA31FD9AA4600B8CDD2 /* corsica.ctm1 */; };
+		BF36F2312119C46D0028B903 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF36F2302119C46D0028B903 /* CoreLocation.framework */; };
+		BF3EF886222455EF00745FA0 /* CartoType.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3EF885222455EF00745FA0 /* CartoType.framework */; };
 		BF5E279D1FFD462100820FE1 /* standard.ctstyle in Resources */ = {isa = PBXBuildFile; fileRef = BF5E279C1FFD462100820FE1 /* standard.ctstyle */; };
 		BF5E279F1FFD462F00820FE1 /* DejaVuSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF5E279E1FFD462F00820FE1 /* DejaVuSans.ttf */; };
-		BF5E27A32007976600820FE1 /* CartoType.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5E27A22007976600820FE1 /* CartoType.framework */; };
-		BF5E27A52007999200820FE1 /* manhattan.ctm1 in Resources */ = {isa = PBXBuildFile; fileRef = BF5E27A42007999200820FE1 /* manhattan.ctm1 */; };
+		BF66CDEA21393A42004FDDE8 /* south_of_england.ctm1 in Resources */ = {isa = PBXBuildFile; fileRef = BF66CDE921393A42004FDDE8 /* south_of_england.ctm1 */; };
 		BF7E32E91FBC6043003ABA6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7E32E81FBC6043003ABA6D /* main.m */; };
 		BF7E32EC1FBC6043003ABA6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7E32EB1FBC6043003ABA6D /* AppDelegate.m */; };
 		BF7E32EF1FBC6043003ABA6D /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF7E32EE1FBC6043003ABA6D /* ViewController.mm */; };
 		BF7E32F21FBC6043003ABA6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E32F01FBC6043003ABA6D /* Main.storyboard */; };
 		BF7E32F41FBC6043003ABA6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF7E32F31FBC6043003ABA6D /* Assets.xcassets */; };
 		BF7E32F71FBC6044003ABA6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E32F51FBC6044003ABA6D /* LaunchScreen.storyboard */; };
-		BF7E33001FBC6A42003ABA6D /* CartoTypeMapView.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF7E32FF1FBC6A42003ABA6D /* CartoTypeMapView.mm */; };
 		BF7E33051FBC6A90003ABA6D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF7E33041FBC6A90003ABA6D /* OpenGLES.framework */; };
 		BF7E33091FBC6AC5003ABA6D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF7E33081FBC6AC5003ABA6D /* GLKit.framework */; };
-		BF7E33101FBC7D16003ABA6D /* santa-cruz.ctm1 in Resources */ = {isa = PBXBuildFile; fileRef = BF7E330F1FBC7D16003ABA6D /* santa-cruz.ctm1 */; };
-		BF7E33191FBF1EF7003ABA6D /* london.ctm1 in Resources */ = {isa = PBXBuildFile; fileRef = BF7E33181FBF1EF7003ABA6D /* london.ctm1 */; };
+		BFA10BE0210381FC00618C89 /* cycle.ctstyle in Resources */ = {isa = PBXBuildFile; fileRef = BFA10BDF210381FC00618C89 /* cycle.ctstyle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BF1ABBA31FD9AA4600B8CDD2 /* corsica.ctm1 */ = {isa = PBXFileReference; lastKnownFileType = file; path = corsica.ctm1; sourceTree = "<group>"; };
+		BF36F2302119C46D0028B903 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BF3EF885222455EF00745FA0 /* CartoType.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CartoType.framework; sourceTree = "<group>"; };
 		BF5E279C1FFD462100820FE1 /* standard.ctstyle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = standard.ctstyle; sourceTree = "<group>"; };
 		BF5E279E1FFD462F00820FE1 /* DejaVuSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DejaVuSans.ttf; sourceTree = "<group>"; };
-		BF5E27A22007976600820FE1 /* CartoType.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CartoType.framework; sourceTree = "<group>"; };
-		BF5E27A42007999200820FE1 /* manhattan.ctm1 */ = {isa = PBXFileReference; lastKnownFileType = file; path = manhattan.ctm1; sourceTree = "<group>"; };
+		BF66CDE921393A42004FDDE8 /* south_of_england.ctm1 */ = {isa = PBXFileReference; lastKnownFileType = file; path = south_of_england.ctm1; sourceTree = "<group>"; };
 		BF7E32E41FBC6043003ABA6D /* TestGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF7E32E81FBC6043003ABA6D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BF7E32EA1FBC6043003ABA6D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -41,12 +39,9 @@
 		BF7E32F31FBC6043003ABA6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF7E32F61FBC6044003ABA6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF7E32F81FBC6044003ABA6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BF7E32FE1FBC6A42003ABA6D /* CartoTypeMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartoTypeMapView.h; sourceTree = "<group>"; };
-		BF7E32FF1FBC6A42003ABA6D /* CartoTypeMapView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CartoTypeMapView.mm; sourceTree = "<group>"; };
 		BF7E33041FBC6A90003ABA6D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF7E33081FBC6AC5003ABA6D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		BF7E330F1FBC7D16003ABA6D /* santa-cruz.ctm1 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "santa-cruz.ctm1"; path = "../../../test/data/ctm1/santa-cruz.ctm1"; sourceTree = "<group>"; };
-		BF7E33181FBF1EF7003ABA6D /* london.ctm1 */ = {isa = PBXFileReference; lastKnownFileType = file; path = london.ctm1; sourceTree = "<group>"; };
+		BFA10BDF210381FC00618C89 /* cycle.ctstyle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cycle.ctstyle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +49,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF36F2312119C46D0028B903 /* CoreLocation.framework in Frameworks */,
 				BF7E33091FBC6AC5003ABA6D /* GLKit.framework in Frameworks */,
-				BF5E27A32007976600820FE1 /* CartoType.framework in Frameworks */,
+				BF3EF886222455EF00745FA0 /* CartoType.framework in Frameworks */,
 				BF7E33051FBC6A90003ABA6D /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,8 +80,6 @@
 		BF7E32E61FBC6043003ABA6D /* TestGL */ = {
 			isa = PBXGroup;
 			children = (
-				BF7E32FE1FBC6A42003ABA6D /* CartoTypeMapView.h */,
-				BF7E32FF1FBC6A42003ABA6D /* CartoTypeMapView.mm */,
 				BF7E32EA1FBC6043003ABA6D /* AppDelegate.h */,
 				BF7E32EB1FBC6043003ABA6D /* AppDelegate.m */,
 				BF7E32ED1FBC6043003ABA6D /* ViewController.h */,
@@ -110,7 +104,8 @@
 		BF7E33031FBC6A90003ABA6D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BF5E27A22007976600820FE1 /* CartoType.framework */,
+				BF3EF885222455EF00745FA0 /* CartoType.framework */,
+				BF36F2302119C46D0028B903 /* CoreLocation.framework */,
 				BF7E33081FBC6AC5003ABA6D /* GLKit.framework */,
 				BF7E33041FBC6A90003ABA6D /* OpenGLES.framework */,
 			);
@@ -120,12 +115,10 @@
 		BF7E330A1FBC7CCF003ABA6D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BF5E27A42007999200820FE1 /* manhattan.ctm1 */,
+				BF66CDE921393A42004FDDE8 /* south_of_england.ctm1 */,
 				BF5E279E1FFD462F00820FE1 /* DejaVuSans.ttf */,
 				BF5E279C1FFD462100820FE1 /* standard.ctstyle */,
-				BF1ABBA31FD9AA4600B8CDD2 /* corsica.ctm1 */,
-				BF7E33181FBF1EF7003ABA6D /* london.ctm1 */,
-				BF7E330F1FBC7D16003ABA6D /* santa-cruz.ctm1 */,
+				BFA10BDF210381FC00618C89 /* cycle.ctstyle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -190,14 +183,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF7E32F71FBC6044003ABA6D /* LaunchScreen.storyboard in Resources */,
-				BF7E33191FBF1EF7003ABA6D /* london.ctm1 in Resources */,
-				BF1ABBA41FD9AA4600B8CDD2 /* corsica.ctm1 in Resources */,
+				BFA10BE0210381FC00618C89 /* cycle.ctstyle in Resources */,
 				BF5E279D1FFD462100820FE1 /* standard.ctstyle in Resources */,
-				BF7E33101FBC7D16003ABA6D /* santa-cruz.ctm1 in Resources */,
 				BF7E32F41FBC6043003ABA6D /* Assets.xcassets in Resources */,
 				BF5E279F1FFD462F00820FE1 /* DejaVuSans.ttf in Resources */,
-				BF5E27A52007999200820FE1 /* manhattan.ctm1 in Resources */,
 				BF7E32F21FBC6043003ABA6D /* Main.storyboard in Resources */,
+				BF66CDEA21393A42004FDDE8 /* south_of_england.ctm1 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +202,6 @@
 				BF7E32EF1FBC6043003ABA6D /* ViewController.mm in Sources */,
 				BF7E32EC1FBC6043003ABA6D /* AppDelegate.m in Sources */,
 				BF7E32E91FBC6043003ABA6D /* main.m in Sources */,
-				BF7E33001FBC6A42003ABA6D /* CartoTypeMapView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

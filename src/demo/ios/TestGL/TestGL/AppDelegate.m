@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "CartoTypeMapView.h"
 #import <GLKit/GLKit.h>
 
 @interface AppDelegate ()
@@ -21,17 +20,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     {
     // Override point for customization after application launch.
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    self.window = [[UIWindow alloc] initWithFrame:frame];
     
-    CartoTypeMapView* view = [[CartoTypeMapView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
-    int width = view.frame.size.width;
-    int height = view.frame.size.height;
+    int width = frame.size.width;
+    int height = frame.size.height;
     int scale = [[UIScreen mainScreen] scale];
     width *= scale;
     height *= scale;
     CartoTypeFrameworkParam* param = [[CartoTypeFrameworkParam alloc] init];
-    param.mapFileName = @"manhattan";
+    param.mapFileName = @"south_of_england";
     param.styleSheetFileName = @"standard";
     param.fontFileName = @"DejaVuSans";
     param.viewWidth = width;
@@ -39,19 +37,14 @@
     
     // Create the framework object.
     CartoTypeFramework* framework = [[CartoTypeFramework alloc] initWithParam:param];
-    [view setFramework:framework];
 
-    ViewController* view_controller = [[ViewController alloc] initWithFramework:framework];
-    view_controller.view = view;
-    
-    // Call viewDidLoad manually; it is not called after setting the view programmatically.
-    [view_controller viewDidLoad];
-    
-    view_controller.preferredFramesPerSecond = 30;
+    // Create the view controller.
+    ViewController* view_controller = [[ViewController alloc] init:framework bounds:frame];
     self.window.rootViewController = view_controller;
 
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
     return YES;
     }
 

@@ -2,8 +2,7 @@
 //  AppDelegate.swift
 //  CartoTypeSwiftDemo
 //
-//  Created by Graham Asher on 20/11/2016.
-//  Copyright © 2016 Graham Asher. All rights reserved.
+//  Copyright © 2016-2019 CartoType Ltd. All rights reserved.
 //
 
 import UIKit
@@ -16,14 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
-        // Override point for customization after application launch.
-        self.window = UIWindow.init(frame: UIScreen.main.bounds)
-        let view = CartoTypeDemoView.init(frame: UIScreen.main.bounds)
-        
         // Create the CartoType framework
-        let scale = UIScreen.main.scale;
-        let width = view.frame.size.width * scale
-        let height = view.frame.size.height * scale
+        let bounds = UIScreen.main.bounds;
+        self.window = UIWindow.init(frame: bounds)
+        let scale = UIScreen.main.scale
+        let width = bounds.width * scale
+        let height = bounds.height * scale
         let param = CartoTypeFrameworkParam()
         param.mapFileName = "santa-cruz"
         param.styleSheetFileName = "standard"
@@ -32,17 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         param.viewHeight = Int32(height)
         let framework = CartoTypeFramework.init(param: param)
         
-        // Display the framework using a graphics-accelerated view.
-        view.setFramework(framework)
+        // Uncomment the following line to create walking routes, not driving routes.
+        // framework?.setMainProfileType(WalkingProfile)
         
         // Add a scale bar.
-        framework?.setScaleBar(false,width: 2,unit: "in",position: NoticePositionBottomLeft)
-        
-        let view_controller = ViewController.init(framework: framework)
-        view_controller.view = view
-        view_controller.viewDidLoad()
-        view_controller.preferredFramesPerSecond = 30;
-        self.window?.rootViewController = view_controller;
+        framework?.setScaleBar(false,width: 1.75,unit: "in",position: NoticePositionBottomLeft)
+
+        // Create the view controller.
+        let view_controller = ViewController.init(aFrameWork: framework, aBounds:bounds)
+        self.window?.rootViewController = view_controller
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
 

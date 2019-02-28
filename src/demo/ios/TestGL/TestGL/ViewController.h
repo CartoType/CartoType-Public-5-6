@@ -1,18 +1,17 @@
-//
-//  ViewController.h
-//  TestGL
-//
-//  Created by Graham Asher on 15/11/2017.
-//  Copyright © 2017-2018 CartoType. All rights reserved.
-//
+/*
+ViewController.h
+ 
+A view controller for the TestGL demo program.
+*/
 
 #import <GLKit/GLKit.h>
 #import <CoreLocation/CLLocationManager.h>
 #import <CoreLocation/CLLocationManagerDelegate.h>
-#import "CartoTypeMapView.h"
+#import <CartoType/CartoType.h>
 
-@interface ViewController : GLKViewController <UIGestureRecognizerDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
 
--(id)initWithFramework:(CartoTypeFramework*)aFramework;
+@interface ViewController : CartoTypeViewController <UIGestureRecognizerDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
+
+-(id)init:(CartoTypeFramework*)aFramework bounds:(CGRect)aBounds;
 
 @end
