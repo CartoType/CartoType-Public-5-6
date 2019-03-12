@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
             //String style_file = ct_dir + "style/standard.ctstyle";
             //String font_file = ct_dir + "font/DejaVuSans.ttf";
 
-            Framework framework = new Framework(map_file.getAbsolutePath(),style_file.getAbsolutePath(),font_file.getAbsolutePath(),
+            Framework framework = new Framework(this,map_file.getAbsolutePath(),style_file.getAbsolutePath(),font_file.getAbsolutePath(),
                     256,256);
             //framework.setPerspective(true);
             //framework.enableLayer("terrain-height-feet",false);
