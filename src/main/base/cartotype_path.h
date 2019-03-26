@@ -79,7 +79,7 @@ class MPath
     bool Intersects(const MPath& aPath,const TRect* aBounds = nullptr) const;
     int32_t MaxDistanceFromOrigin() const;
     double DistanceFrom(const MPath& aOther,TPointFP* aNearest1 = nullptr,TPointFP* aNearest2 = nullptr) const;
-    double DistanceFromPoint(const TPointFP& aPoint,TPointFP* aNearest = nullptr,size_t* aContourIndex = nullptr,size_t* aLineIndex = nullptr) const;
+    double DistanceFromPoint(const TPointFP& aPoint,TPointFP* aNearest = nullptr,size_t* aContourIndex = nullptr,size_t* aLineIndex = nullptr,double* aFractionaLineIndex = nullptr) const;
     bool IsClippingNeeded(const TRect& aClip) const;
     COutline Copy() const;
     COutline ClippedPath(const TRect& aClip) const;
@@ -251,7 +251,9 @@ class TContour: public MPath
     bool MayIntersect(const TRect& aRect) const;
     bool Intersects(const TRect& aRect) const;
     double DistanceFrom(const TContour& aOther,TPointFP* aNearest1 = nullptr,TPointFP* aNearest2 = nullptr) const;
-    double DistanceFromPoint(const TPointFP& aPoint,TPointFP* aNearest = nullptr,double* aNearestLength = nullptr,bool* aLeft = nullptr,size_t* aLineIndex = nullptr) const;
+    double DistanceFromPoint(const TPointFP& aPoint,TPointFP* aNearest = nullptr,
+                             double* aNearestLength = nullptr,bool* aLeft = nullptr,size_t* aLineIndex = nullptr,
+                             double* aFractionalLineIndex = nullptr) const;
     TPointFP PointAtLength(double aLength,double aOffset = 0,int32_t* aLineIndex = nullptr) const;
     void GetOrientation(const TPoint& aCenter,TPoint& aOrientation) const;
     void GetPrincipalAxis(TPointFP& aCenter,TPointFP& aVector) const;

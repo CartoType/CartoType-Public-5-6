@@ -1,6 +1,6 @@
 /*
-CARTOTYPE_EXPRESSION.H
-Copyright (C) 2009-2018 CartoType Ltd.
+cartotype_expression.h
+Copyright (C) 2009-2019 CartoType Ltd.
 See www.cartotype.com for more information.
 */
 
@@ -56,6 +56,10 @@ class TExpressionValue
         }
 
     operator double() const { return iNumber; }
+    int ToInt() const
+        {
+        return IsNan() ? 0 : int(iNumber);
+        }
 
     // Overload comparison operators for string values.
     int operator<(const TExpressionValue& aOther)
