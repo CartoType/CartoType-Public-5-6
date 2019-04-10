@@ -513,7 +513,7 @@ class CFramework: public MNavigatorObserver
     TResult SetViewToWholeMap();
     TResult GetView(double& aMinX,double& aMinY,double& aMaxX,double& aMaxY,TCoordType aCoordType) const;
     TResult GetView(TRectFP& aView,TCoordType aCoordType) const;
-    TResult GetView(TFixedSizeContour<4,true>& aView,TCoordType aCoordType) const;
+    TResult GetView(TFixedSizeContourFP<4,true>& aView,TCoordType aCoordType) const;
     TResult GetMapExtent(double& aMinX,double& aMinY,double& aMaxX,double& aMaxY,TCoordType aCoordType) const;
     TResult GetMapExtent(TRectFP& aMapExtent,TCoordType aCoordType) const;
     CString GetProjectionAsProj4Param() const; 

@@ -567,38 +567,38 @@ class TRectFP
     /** The less-than operator. */
     bool operator<(const TRectFP& aRect) const { return iTopLeft < aRect.iTopLeft || (iTopLeft == aRect.iTopLeft && iBottomRight < aRect.iBottomRight); }
     /** Return the left edge. */
-    double Left() const { return iTopLeft.iX; }
+    double Left() const noexcept { return iTopLeft.iX; }
     /** Return the top edge. */
-    double Top() const { return iTopLeft.iY; }
+    double Top() const noexcept { return iTopLeft.iY; }
     /** Return the right edge. */
-    double Right() const { return iBottomRight.iX; }
+    double Right() const noexcept { return iBottomRight.iX; }
     /** Return the bottom edge. */
-    double Bottom() const { return iBottomRight.iY; }
+    double Bottom() const noexcept { return iBottomRight.iY; }
     /**
     Return true if the rectangle is empty, defined as having a width or height
     less than or equal to zero.
     */
-    bool IsEmpty() const { return Left() >= Right() || Top() >= Bottom(); }
+    bool IsEmpty() const noexcept { return Left() >= Right() || Top() >= Bottom(); }
     /** Return the width. */
-    double Width() const { return Right() - Left(); }
+    double Width() const noexcept { return Right() - Left(); }
     /** Return the height. */
-    double Height() const { return Bottom() - Top(); }
+    double Height() const noexcept { return Bottom() - Top(); }
     /** Return the top right corner. */
-    TPointFP TopRight() const { return TPointFP(iBottomRight.iX,iTopLeft.iY); }
+    TPointFP TopRight() const noexcept { return TPointFP(iBottomRight.iX,iTopLeft.iY); }
     /** Return the bottom left corner. */
-    TPointFP BottomLeft() const { return TPointFP(iTopLeft.iX,iBottomRight.iY); }
+    TPointFP BottomLeft() const noexcept { return TPointFP(iTopLeft.iX,iBottomRight.iY); }
     /** Return the center. */
-    TPointFP Center() const { return TPointFP((iTopLeft.iX + iBottomRight.iX) / 2.0,(iTopLeft.iY + iBottomRight.iY) / 2.0); }
+    TPointFP Center() const noexcept { return TPointFP((iTopLeft.iX + iBottomRight.iX) / 2.0,(iTopLeft.iY + iBottomRight.iY) / 2.0); }
     /**
     Return true if the rectangle contains the point, where containment is defined
     using half-open intervals: the rectangle includes points on its top and
     left edges but not its right and bottom edges.
     */
-    bool Contains(const TPointFP& aPoint) const
+    bool Contains(const TPointFP& aPoint) const noexcept
         { return aPoint.iX >= iTopLeft.iX && aPoint.iY >= iTopLeft.iY &&
                  aPoint.iX < iBottomRight.iX && aPoint.iY < iBottomRight.iY; }
     /** Return true if the rectangle contains another rectangle. */
-    bool Contains(const TRectFP& aRect) const
+    bool Contains(const TRectFP& aRect) const noexcept
         {
         return iTopLeft.iX <= aRect.iTopLeft.iX &&
                iTopLeft.iY <= aRect.iTopLeft.iY &&
@@ -654,13 +654,15 @@ class TRectFP
     If both rectangles are non-empty, return true only
     if the intersection is non-empy.
     */
-    bool Intersects(const TRectFP& aRect) const
+    bool Intersects(const TRectFP& aRect) const noexcept
         {
         return iTopLeft.iX < aRect.iBottomRight.iX &&
                iBottomRight.iX > aRect.iTopLeft.iX &&
                iTopLeft.iY < aRect.iBottomRight.iY &&
                iBottomRight.iY > aRect.iTopLeft.iY;
         }
+    bool Intersects(const TPointFP& aStart,const TPointFP& aEnd,
+                    TPointFP* aIntersectionStart = nullptr,TPointFP* aIntersectionEnd = nullptr) const noexcept;
 
     /** The top left corner. */
     TPointFP iTopLeft;

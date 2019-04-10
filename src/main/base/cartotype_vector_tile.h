@@ -382,7 +382,7 @@ class TMapState
     TMapState Interpolate(const TMapState& aOther,double aTime);
 
     TViewState m_view_state;
-    TFixedSizeContour<4,true> m_view_in_map_coords;
+    TFixedSizeContourFP<4,true> m_view_in_map_coords;
     TTransform3FP m_map_transform;
     TTransformFP m_map_transform_2D;
     TTransform3FP m_perspective_transform;
@@ -523,7 +523,7 @@ class CVectorTileServer: public MFrameworkObserver
     void Invalidate(TVectorDataType aType);
     double ZoomLevelFromScaleDenominator(double aScaleDenominator) const;
     double ScaleDenominatorFromZoomLevel(double aZoomLevel) const;
-    TTileSpec TileFromMapPoint(TPoint aMapPoint,size_t aZoomLevel) const;
+    TTileSpec TileFromMapPoint(TPointFP aMapPoint,size_t aZoomLevel) const;
     TRectFP TileBounds(const TTileSpec& aTileSpec) const;
     TTileSpec StartTileTask() { return m_task_queue.StartTask(); }
     TLabelSetSpec StartLabelBitmapTask() { return m_label_set_task_queue.StartTask(); }

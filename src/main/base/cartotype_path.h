@@ -693,6 +693,36 @@ class CGeometry
     bool iClosed = false;
     };
 
+class TContourFP
+    {
+    public:
+    TContourFP() = default;
+    TContourFP(const TPointFP* aPoint,size_t aPoints,bool aClosed) :
+        m_point(aPoint),
+        m_end(aPoint + aPoints),
+        m_closed(aClosed)
+        {
+        }
+    const TPointFP* Point() const noexcept { return m_point; }
+    size_t Points() const noexcept { return m_end - m_point; }
+    bool Closed() const noexcept { return m_closed; }
+    TRectFP Bounds() const noexcept;
+    bool Intersects(const TRectFP& aRect) const noexcept;
+    bool Contains(const TPointFP& aPoint) const noexcept;
+
+    private:
+    const TPointFP* m_point = nullptr;
+    const TPointFP* m_end = nullptr;
+    bool m_closed = false;
+    };
+
+/** A contour with a fixed number of floating-point points. */
+template<size_t aPointCount,bool aClosed> class TFixedSizeContourFP: public std::array<TPointFP,aPointCount>
+    {
+    public:
+    operator TContourFP() const { return TContourFP(std::array<TPointFP,aPointCount>::data(),aPointCount,aClosed); }
+    };
+
 class CPolygonFP;
 class CContourFP
     {
@@ -708,7 +738,8 @@ class CContourFP
         }    
     void AppendPoint(const TPointFP& aPoint) { iPoint.push_back(aPoint); }
     CPolygonFP Clip(const TRectFP& aClip);
-    TRectFP Bounds() const;
+    TRectFP Bounds() const
+        { return TContourFP(iPoint.data(),iPoint.size(),false).Bounds(); }
 
     std::vector<TPointFP> iPoint;
     };
